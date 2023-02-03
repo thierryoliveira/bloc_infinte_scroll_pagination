@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:infinite_scroll_bloc/application/widgets/passengers_sliver_list.dart';
+import 'package:infinite_scroll_bloc/core/colors/app_colors.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../domain/entities/passanger.entity.dart';
@@ -33,7 +35,24 @@ class _PassengersPageState extends State<PassengersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.black,
       body: CustomScrollView(slivers: [
+        SliverAppBar(
+          backgroundColor: AppColors.purple,
+          actions: [
+            IconButton(
+                onPressed: () =>
+                    _passengersBloc.add(GetAllPassengers(pageIndex: 0)),
+                icon: const Icon(FontAwesomeIcons.arrowsRotate)),
+          ],
+          expandedHeight: 120,
+          flexibleSpace: const FlexibleSpaceBar(
+            title: Text('Passangers list'),
+          ),
+        ),
+        const SliverToBoxAdapter(
+          child: SizedBox(height: 16),
+        ),
         BlocConsumer<PassengersBloc, PassengersState>(
           listener: (context, state) {
             if (state is PassengersLoaded) {
