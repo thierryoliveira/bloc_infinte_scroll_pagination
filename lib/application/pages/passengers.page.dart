@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:infinite_scroll_bloc/application/widgets/passengers_sliver_list.dart';
 import 'package:infinite_scroll_bloc/core/colors/app_colors.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -39,21 +38,27 @@ class _PassengersPageState extends State<PassengersPage> {
       body: CustomScrollView(slivers: [
         SliverAppBar(
           backgroundColor: AppColors.purple,
-          actions: [
-            IconButton(
-                onPressed: () =>
-                    _passengersBloc.add(GetAllPassengers(pageIndex: 0)),
-                icon: const Icon(FontAwesomeIcons.arrowsRotate)),
-          ],
+          pinned: true,
           expandedHeight: 120,
-          flexibleSpace: const FlexibleSpaceBar(
-            title: Text('Passangers list'),
+          flexibleSpace: FlexibleSpaceBar(
+            title: BlocBuilder<PassengersBloc, PassengersState>(
+              buildWhen: (previous, current) => current is PassengersLoaded,
+              builder: (context, state) {
+                if (state is PassengersLoaded) {
+                  return Text(
+                      'Passengers loaded: ${state.pagingState.itemList?.length ?? 0}');
+                } else {
+                  return const Text('Passengers list');
+                }
+              },
+            ),
           ),
         ),
         const SliverToBoxAdapter(
           child: SizedBox(height: 16),
         ),
         BlocConsumer<PassengersBloc, PassengersState>(
+          bloc: _passengersBloc,
           listener: (context, state) {
             if (state is PassengersLoaded) {
               _pagingController.value = state.pagingState;
