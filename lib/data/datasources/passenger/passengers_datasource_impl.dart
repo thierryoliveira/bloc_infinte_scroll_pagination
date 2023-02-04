@@ -14,8 +14,7 @@ class PassengersDatasourceImpl implements PassengersDatasource {
   @override
   Future<PageInfoEntity> getPassengers(int pageIndex) async {
     try {
-      final mapResult = await _client.get(
-          'https://api.instantwebtools.net/v1/passenger?page=$pageIndex&size=10');
+      final mapResult = await _client.get('/passenger?page=$pageIndex&size=10');
       return PageInfoEntity.fromJson(mapResult.data);
     } on DioError catch (e) {
       throw PassengersException(message: e.message);
