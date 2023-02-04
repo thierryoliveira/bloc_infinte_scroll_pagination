@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinite_scroll_bloc/domain/entities/page_info.entity.dart';
+import 'package:infinite_scroll_bloc/core/errors/exceptions/passengers_exception.dart';
+import 'package:infinite_scroll_bloc/domain/repositories/passengers_repository.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../domain/entities/passanger.entity.dart';
@@ -11,7 +11,11 @@ part 'passengers_event.dart';
 part 'passengers_state.dart';
 
 class PassengersBloc extends Bloc<PassengersEvent, PassengersState> {
-  PassengersBloc() : super(PassengersInitial()) {
+  final PassengersRepository _passengersRepository;
+
+  PassengersBloc({required PassengersRepository passengersRepository})
+      : _passengersRepository = passengersRepository,
+        super(PassengersInitial()) {
     on<GetAllPassengers>(_onGetAllPassengers);
   }
 
@@ -22,19 +26,16 @@ class PassengersBloc extends Bloc<PassengersEvent, PassengersState> {
         : null;
     emit(PassengersLoading(oldItems: oldItems));
     try {
-      final Dio dio = Dio();
-      final mapResult = await dio.get(
-          'https://api.instantwebtools.net/v1/passenger?page=${event.pageIndex}&size=10');
-      final parsedResult = PageInfoEntity.fromJson(mapResult.data);
+      final result = await _passengersRepository.getPassengers(event.pageIndex);
 
       final List<PassengerEntity> allItems = [
         ...?oldItems,
-        ...parsedResult.passengers ?? []
+        ...result.passengers ?? []
       ];
       emit(PassengersLoaded(
           pagingState: PagingState<int, PassengerEntity>(
               itemList: allItems, nextPageKey: event.pageIndex + 1)));
-    } on DioError catch (e) {
+    } on PassengersException catch (e) {
       emit(PassengersError(message: e.message));
     } catch (e) {
       emit(PassengersError(message: e.toString()));
