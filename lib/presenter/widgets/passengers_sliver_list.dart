@@ -30,18 +30,21 @@ class PassengersSliverList extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            item.name ?? 'no name',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 20),
-                          ),
-                          Text(
-                              ('${item.airline?.last.name} - ${item.airline?.last.country}')),
-                        ],
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.name ?? 'no name',
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 20),
+                            ),
+                            Text(
+                                ('${item.airline?.last.name} - ${item.airline?.last.country}')),
+                          ],
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
