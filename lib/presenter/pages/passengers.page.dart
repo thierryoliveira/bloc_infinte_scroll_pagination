@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinite_scroll_bloc/application/widgets/passengers_sliver_list.dart';
+import 'package:infinite_scroll_bloc/presenter/widgets/passengers_sliver_list.dart';
 import 'package:infinite_scroll_bloc/core/colors/app_colors.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 

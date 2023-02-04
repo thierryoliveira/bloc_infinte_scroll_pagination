@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinite_scroll_bloc/application/pages/passengers.page.dart';
+import 'package:infinite_scroll_bloc/presenter/pages/passengers.page.dart';
 
-import 'application/bloc/passengers_bloc.dart';
+import 'presenter/bloc/passengers_bloc.dart';
 
 void main() {
   runApp(const MyApp());
