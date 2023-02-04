@@ -1,16 +1,14 @@
-# infinite_scroll_bloc
+# Flutter Inifinte Scroll with  BLoC 📲️
 
-A new Flutter project.
+This is an example about how can you use [infinite_scroll_pagination](https://pub.dev/packages/infinite_scroll_pagination) using BLoC pattern, in this case with [flutter_bloc](https://pub.dev/packages/flutter_bloc). I faced some difficulties to find this kind of example using the both flutter favorite libraries, so, I hope this will help you. 😄
 
-## Getting Started
+## Related links 🔗
+ - API that I used: [https://api.instantwebtools.net/v1/passenger](https://api.instantwebtools.net/v1/passenger)
+ - [flutter_bloc documentation](https://bloclibrary.dev/#/)
+ - [infinite_scroll_pagination documentation](https://pub.dev/packages/infinite_scroll_pagination)
 
-This project is a starting point for a Flutter application.
+ ## Feel free to text me 👋🏻
 
-A few resources to get you started if this is your first Flutter project:
+ Thierry Oliveira – [Linkedin](https://www.linkedin.com/in/thierry-oliveira/)  
+ Email: thierry.ifsp@gmail.com
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
